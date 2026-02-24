@@ -217,5 +217,3 @@ Desenvolvido como demonstração de design Card-Based / Grid baseado em diagrama
 ---
 
 **📅 Última atualização:** 24 de Fevereiro de 2026
-
-```
