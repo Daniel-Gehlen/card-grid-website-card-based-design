@@ -1,6 +1,5 @@
 # DESIGN CARD-BASED / GRID
 
-```markdown
 # 🃏 CardGrid - Design Card-Based / Grid
 
 ![Versão](https://img.shields.io/badge/versão-1.0.0-blue)
@@ -183,7 +182,7 @@ Este template é ideal para:
 
 ## 👨‍💻 Autor
 
-Desenvolvido como demonstração de design Card-Based / Grid baseado em diagrama ASCII art.
+Desenvolvido como demonstração de design Card-Based / Grid baseado em diagrama ASCII art por Daniel Gehlen.
 
 ---
 
