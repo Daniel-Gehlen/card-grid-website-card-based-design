@@ -22,6 +22,7 @@ Este é um protótipo funcional de um site com **Design Card-Based / Grid**, des
 - Interface limpa e moderna
 
 ## 🏗️ Estrutura do Site
+
 ```
 
 +--------------------------------------------------------------------+
@@ -51,18 +52,21 @@ Este é um protótipo funcional de um site com **Design Card-Based / Grid**, des
 ## ✨ Funcionalidades Implementadas
 
 ### Cabeçalho (Header)
+
 - ✅ Logo "CardGrid" com gradiente azul
 - ✅ Campo de busca funcional com botão
 - ✅ Menu de navegação com 3 links
 - ✅ Design limpo e moderno
 
 ### Filtros
+
 - ✅ 5 botões de filtro (Todos, Eletrônicos, Moda, Casa, Esportes)
 - ✅ Estado ativo visual (fundo azul)
 - ✅ Efeitos hover suaves
 - ✅ Feedback com alerta ao selecionar
 
 ### Grid de Cards
+
 - ✅ 6 cards de produtos
 - ✅ Grid responsivo com CSS Grid (`repeat(auto-fill, minmax(300px, 1fr))`)
 - ✅ Cards com elevação ao hover
@@ -72,6 +76,7 @@ Este é um protótipo funcional de um site com **Design Card-Based / Grid**, des
 - ✅ Botão "Comprar" em cada card
 
 ### Cards - Detalhamento
+
 | Produto | Imagem | Preço | Avaliação |
 |---------|--------|-------|-----------|
 | Smartphone Pro | 📱 | R$ 2.499 | ★★★★☆ |
@@ -82,18 +87,21 @@ Este é um protótipo funcional de um site com **Design Card-Based / Grid**, des
 | Fone Bluetooth | 🎧 | R$ 349 | ★★★★☆ |
 
 ### Paginação
+
 - ✅ Botões: < 1 2 3 4 ... 10 >
 - ✅ Estado ativo na página 1
 - ✅ Botões clicáveis com feedback
 - ✅ Design consistente com o tema
 
 ### Rodapé
+
 - ✅ Informações de contato (e-mail, telefone)
 - ✅ Endereço
 - ✅ Links institucionais (Termos, Privacidade, Trocas)
 - ✅ Copyright
 
 ### Interatividade JavaScript
+
 - ✅ Filtros alteram estado ativo
 - ✅ Paginação com highlight da página atual
 - ✅ Alertas de feedback para ações
@@ -164,6 +172,7 @@ Todos os elementos interativos são clicáveis:
 ## 📌 Casos de Uso
 
 Este template é ideal para:
+
 - **E-commerces** - Vitrines de produtos
 - **Portfólios criativos** - Galerias de projetos
 - **Sites de conteúdo** - Blogs com cards
@@ -189,6 +198,7 @@ Desenvolvido como demonstração de design Card-Based / Grid baseado em diagrama
 ## 📝 Notas de Versão
 
 ### v1.0.0 (24/02/2026)
+
 - Implementação completa do design ASCII art
 - Grid responsivo com 6 cards de exemplo
 - Sistema de filtros interativo
@@ -197,6 +207,7 @@ Desenvolvido como demonstração de design Card-Based / Grid baseado em diagrama
 - Design testado em múltiplos dispositivos
 
 ### Próximas Melhorias (Sugestões)
+
 - [ ] Adicionar modal com detalhes do produto
 - [ ] Implementar carrinho de compras
 - [ ] Adicionar mais produtos (dinâmico)
@@ -206,6 +217,7 @@ Desenvolvido como demonstração de design Card-Based / Grid baseado em diagrama
 ---
 
 **📅 Última atualização:** 24 de Fevereiro de 2026
+
 ```
 
 ---
