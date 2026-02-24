@@ -1,13 +1,5 @@
 # DESIGN CARD-BASED / GRID
 
-### 📄 About (English)
-
-**Card-Based Grid Layout Website** - A modern responsive e-commerce prototype built with HTML5 and CSS3 Grid. Features interactive filter buttons, search bar, product cards with images, ratings, and prices. Implements CSS Grid for flexible card arrangement, smooth hover animations, pagination controls, and mobile-first responsive design. Ideal for online stores and content dashboards.
-
----
-
-### 📚 README.md
-
 ```markdown
 # 🃏 CardGrid - Design Card-Based / Grid
 
@@ -31,29 +23,30 @@ Este é um protótipo funcional de um site com **Design Card-Based / Grid**, des
 - Interface limpa e moderna
 
 ## 🏗️ Estrutura do Site
-
 ```
+
 +--------------------------------------------------------------------+
-|  LOGO                    BUSCA                       MENU         |
+| LOGO BUSCA MENU |
 +--------------------------------------------------------------------+
-|  FILTROS: [Categoria1] [Categoria2] [Categoria3]                  |
+| FILTROS: [Categoria1] [Categoria2] [Categoria3] |
 +--------------------------------------------------------------------+
-|  +----------------+  +----------------+  +----------------+       |
-|  |   [IMAGEM]     |  |   [IMAGEM]     |  |   [IMAGEM]     |       |
-|  |   Título       |  |   Título       |  |   Título       |       |
-|  |   Descrição    |  |   Descrição    |  |   Descrição    |       |
-|  |   Preço        |  |   Preço        |  |   Preço        |       |
-|  +----------------+  +----------------+  +----------------+       |
-|                                                                    |
-|  +----------------+  +----------------+  +----------------+       |
-|  |   [IMAGEM]     |  |   [IMAGEM]     |  |   [IMAGEM]     |       |
-|  |   Título       |  |   Título       |  |   Título       |       |
-|  |   Descrição    |  |   Descrição    |  |   Descrição    |       |
-|  |   Preço        |  |   Preço        |  |   Preço        |       |
-|  +----------------+  +----------------+  +----------------+       |
+| +----------------+ +----------------+ +----------------+ |
+| | [IMAGEM] | | [IMAGEM] | | [IMAGEM] | |
+| | Título | | Título | | Título | |
+| | Descrição | | Descrição | | Descrição | |
+| | Preço | | Preço | | Preço | |
+| +----------------+ +----------------+ +----------------+ |
+| |
+| +----------------+ +----------------+ +----------------+ |
+| | [IMAGEM] | | [IMAGEM] | | [IMAGEM] | |
+| | Título | | Título | | Título | |
+| | Descrição | | Descrição | | Descrição | |
+| | Preço | | Preço | | Preço | |
+| +----------------+ +----------------+ +----------------+ |
 +--------------------------------------------------------------------+
-|  PAGINAÇÃO: < 1 2 3 4 5 >                                         |
+| PAGINAÇÃO: < 1 2 3 4 5 > |
 +--------------------------------------------------------------------+
+
 ```
 
 ## ✨ Funcionalidades Implementadas
