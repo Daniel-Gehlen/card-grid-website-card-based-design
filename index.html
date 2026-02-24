@@ -1,1 +1,617 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CardGrid | Design Baseado em Cards</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Roboto, system-ui, sans-serif;
+      }
 
+      body {
+        background: #f5f7fa;
+        padding: 20px;
+      }
+
+      /* Container principal */
+      .site-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      /* ASCII Art do design */
+      .ascii-art {
+        background: #1e1e2e;
+        color: #a6e3a1;
+        font-family: "Courier New", monospace;
+        padding: 20px;
+        border-bottom: 3px solid #89b4fa;
+        overflow-x: auto;
+      }
+
+      .ascii-art pre {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.4;
+        font-weight: 500;
+      }
+
+      /* Header com logo, busca e menu */
+      .header {
+        background: white;
+        padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        border-bottom: 2px solid #eef2f6;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+      }
+
+      .search-box {
+        flex: 1;
+        max-width: 400px;
+        display: flex;
+        position: relative;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 12px 20px;
+        border: 2px solid #eef2f6;
+        border-radius: 30px;
+        font-size: 15px;
+        transition: 0.3s;
+        background: #f8fafc;
+      }
+
+      .search-box input:focus {
+        outline: none;
+        border-color: #2a5298;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.1);
+      }
+
+      .search-box button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        background: #2a5298;
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .search-box button:hover {
+        background: #1e3c72;
+      }
+
+      .menu {
+        display: flex;
+        gap: 15px;
+      }
+
+      .menu a {
+        text-decoration: none;
+        color: #334155;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 30px;
+        transition: 0.3s;
+      }
+
+      .menu a:hover {
+        background: #eef2f6;
+        color: #2a5298;
+      }
+
+      /* Filtros */
+      .filters {
+        padding: 20px 30px;
+        background: #f8fafc;
+        border-bottom: 1px solid #eef2f6;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 10px 25px;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 40px;
+        color: #334155;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .filter-btn:hover {
+        background: #2a5298;
+        border-color: #2a5298;
+        color: white;
+      }
+
+      .filter-btn.active {
+        background: #2a5298;
+        border-color: #2a5298;
+        color: white;
+      }
+
+      /* Grid de Cards */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        padding: 30px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: 0.3s;
+        border: 1px solid #eef2f6;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(42, 82, 152, 0.15);
+        border-color: #2a5298;
+      }
+
+      .card-image {
+        height: 200px;
+        background: linear-gradient(135deg, #667eea 0%, #2a5298 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 48px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-image::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: 0.3s;
+      }
+
+      .card:hover .card-image::after {
+        opacity: 1;
+      }
+
+      .card-content {
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 8px;
+      }
+
+      .card-description {
+        color: #64748b;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        flex: 1;
+      }
+
+      .card-price {
+        font-size: 24px;
+        font-weight: 800;
+        color: #2a5298;
+        margin-bottom: 10px;
+      }
+
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #eef2f6;
+        padding-top: 15px;
+        margin-top: auto;
+      }
+
+      .card-rating {
+        color: #fbbf24;
+        font-weight: 600;
+      }
+
+      .card-btn {
+        background: #2a5298;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+      }
+
+      .card-btn:hover {
+        background: #1e3c72;
+      }
+
+      /* Paginação */
+      .pagination {
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-top: 2px solid #eef2f6;
+        background: #f8fafc;
+      }
+
+      .page-btn {
+        padding: 10px 16px;
+        border: 2px solid #e2e8f0;
+        background: white;
+        color: #334155;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        min-width: 45px;
+        text-align: center;
+      }
+
+      .page-btn:hover {
+        background: #2a5298;
+        border-color: #2a5298;
+        color: white;
+      }
+
+      .page-btn.active {
+        background: #2a5298;
+        border-color: #2a5298;
+        color: white;
+      }
+
+      .page-dots {
+        color: #64748b;
+        font-weight: 600;
+      }
+
+      /* Rodapé simples */
+      .footer {
+        background: #1e293b;
+        color: white;
+        padding: 20px 30px;
+        text-align: center;
+        font-size: 14px;
+        border-top: 3px solid #2a5298;
+      }
+
+      .footer a {
+        color: #94a3b8;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+
+      .footer a:hover {
+        color: white;
+      }
+
+      /* Responsividade */
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .search-box {
+          max-width: 100%;
+        }
+
+        .filters {
+          justify-content: center;
+        }
+
+        .cards-grid {
+          grid-template-columns: 1fr;
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-container">
+      <!-- ASCII Art do design Card-Based -->
+      <div class="ascii-art">
+        <pre>
++--------------------------------------------------------------------+
+|  LOGO                    BUSCA                       MENU         |
++--------------------------------------------------------------------+
+|  FILTROS: [Categoria1] [Categoria2] [Categoria3]                  |
++--------------------------------------------------------------------+
+|  +----------------+  +----------------+  +----------------+       |
+|  |   [IMAGEM]     |  |   [IMAGEM]     |  |   [IMAGEM]     |       |
+|  |   Título       |  |   Título       |  |   Título       |       |
+|  |   Descrição    |  |   Descrição    |  |   Descrição    |       |
+|  |   Preço        |  |   Preço        |  |   Preço        |       |
+|  +----------------+  +----------------+  +----------------+       |
+|                                                                    |
+|  +----------------+  +----------------+  +----------------+       |
+|  |   [IMAGEM]     |  |   [IMAGEM]     |  |   [IMAGEM]     |       |
+|  |   Título       |  |   Título       |  |   Título       |       |
+|  |   Descrição    |  |   Descrição    |  |   Descrição    |       |
+|  |   Preço        |  |   Preço        |  |   Preço        |       |
+|  +----------------+  +----------------+  +----------------+       |
++--------------------------------------------------------------------+
+|  PAGINAÇÃO: < 1 2 3 4 5 >                                         |
++--------------------------------------------------------------------+
+            </pre
+        >
+      </div>
+
+      <!-- HEADER: Logo, Busca, Menu -->
+      <header class="header">
+        <div class="logo">CardGrid</div>
+        <div class="search-box">
+          <input type="text" placeholder="Buscar produtos..." />
+          <button type="button">Buscar</button>
+        </div>
+        <nav class="menu">
+          <a href="#">Home</a>
+          <a href="#">Ofertas</a>
+          <a href="#">Contato</a>
+        </nav>
+      </header>
+
+      <!-- FILTROS -->
+      <div class="filters">
+        <button class="filter-btn active">Todos</button>
+        <button class="filter-btn">Eletrônicos</button>
+        <button class="filter-btn">Moda</button>
+        <button class="filter-btn">Casa</button>
+        <button class="filter-btn">Esportes</button>
+      </div>
+
+      <!-- GRID DE CARDS -->
+      <main class="cards-grid">
+        <!-- Card 1 -->
+        <div class="card" onclick="window.location.href = '#'">
+          <div class="card-image">📱</div>
+          <div class="card-content">
+            <h3 class="card-title">Smartphone Pro</h3>
+            <p class="card-description">
+              Tela de 6.7", 128GB, câmera tripla de 48MP
+            </p>
+            <div class="card-price">R$ 2.499</div>
+            <div class="card-footer">
+              <span class="card-rating">★★★★☆</span>
+              <button
+                class="card-btn"
+                onclick="
+                  event.stopPropagation();
+                  alert('Produto adicionado ao carrinho!');
+                "
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" onclick="window.location.href = '#'">
+          <div class="card-image">👕</div>
+          <div class="card-content">
+            <h3 class="card-title">Camisa Social</h3>
+            <p class="card-description">
+              Algodão egípcio, slim fit, diversas cores
+            </p>
+            <div class="card-price">R$ 189</div>
+            <div class="card-footer">
+              <span class="card-rating">★★★★★</span>
+              <button
+                class="card-btn"
+                onclick="
+                  event.stopPropagation();
+                  alert('Produto adicionado ao carrinho!');
+                "
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" onclick="window.location.href = '#'">
+          <div class="card-image">💻</div>
+          <div class="card-content">
+            <h3 class="card-title">Notebook Ultra</h3>
+            <p class="card-description">
+              16GB RAM, SSD 512GB, tela 15.6" Full HD
+            </p>
+            <div class="card-price">R$ 4.299</div>
+            <div class="card-footer">
+              <span class="card-rating">★★★★☆</span>
+              <button
+                class="card-btn"
+                onclick="
+                  event.stopPropagation();
+                  alert('Produto adicionado ao carrinho!');
+                "
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card" onclick="window.location.href = '#'">
+          <div class="card-image">🏠</div>
+          <div class="card-content">
+            <h3 class="card-title">Kit Cozinha</h3>
+            <p class="card-description">Panelas antiaderentes, 10 peças</p>
+            <div class="card-price">R$ 299</div>
+            <div class="card-footer">
+              <span class="card-rating">★★★☆☆</span>
+              <button
+                class="card-btn"
+                onclick="
+                  event.stopPropagation();
+                  alert('Produto adicionado ao carrinho!');
+                "
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card" onclick="window.location.href = '#'">
+          <div class="card-image">⚽</div>
+          <div class="card-content">
+            <h3 class="card-title">Bola Oficial</h3>
+            <p class="card-description">
+              Couro sintético, tamanho 5, aprovada pela FIFA
+            </p>
+            <div class="card-price">R$ 189</div>
+            <div class="card-footer">
+              <span class="card-rating">★★★★★</span>
+              <button
+                class="card-btn"
+                onclick="
+                  event.stopPropagation();
+                  alert('Produto adicionado ao carrinho!');
+                "
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card" onclick="window.location.href = '#'">
+          <div class="card-image">🎧</div>
+          <div class="card-content">
+            <h3 class="card-title">Fone Bluetooth</h3>
+            <p class="card-description">
+              Cancelamento de ruído, 30h de bateria
+            </p>
+            <div class="card-price">R$ 349</div>
+            <div class="card-footer">
+              <span class="card-rating">★★★★☆</span>
+              <button
+                class="card-btn"
+                onclick="
+                  event.stopPropagation();
+                  alert('Produto adicionado ao carrinho!');
+                "
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- PAGINAÇÃO -->
+      <div class="pagination">
+        <button class="page-btn" onclick="alert('Página anterior')">⟨</button>
+        <button class="page-btn active" onclick="alert('Página 1')">1</button>
+        <button class="page-btn" onclick="alert('Página 2')">2</button>
+        <button class="page-btn" onclick="alert('Página 3')">3</button>
+        <button class="page-btn" onclick="alert('Página 4')">4</button>
+        <span class="page-dots">...</span>
+        <button class="page-btn" onclick="alert('Página 10')">10</button>
+        <button class="page-btn" onclick="alert('Próxima página')">⟩</button>
+      </div>
+
+      <!-- RODAPÉ -->
+      <footer class="footer">
+        <div>
+          <span>📧 contato@cardgrid.com</span> •
+          <span>📱 (11) 99999-7777</span> •
+          <span>📍 Card Grid, CG</span>
+        </div>
+        <div style="margin-top: 10px">
+          <a href="#">Termos</a> • <a href="#">Privacidade</a> •
+          <a href="#">Trocas</a>
+        </div>
+        <div style="margin-top: 15px; font-size: 12px; opacity: 0.7">
+          © 2026 CardGrid - Design Card-Based / Grid
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Funcionalidade simples para os filtros
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          this.classList.add("active");
+          alert(`Filtro selecionado: ${this.textContent}`);
+        });
+      });
+
+      // Funcionalidade para paginação
+      document.querySelectorAll(".page-btn").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          if (
+            !this.classList.contains("active") &&
+            this.textContent !== "⟨" &&
+            this.textContent !== "⟩"
+          ) {
+            document
+              .querySelectorAll(".page-btn")
+              .forEach((b) => b.classList.remove("active"));
+            this.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
